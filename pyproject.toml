@@ -1,0 +1,19 @@
+[project]
+name = "fizlet-app"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Manly861",email = "lym861@hsd.k12.or.us"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flet[all] (>=0.85.1,<0.86.0)"
+]
+
+[tool.poetry]
+packages = [{include = "fizlet_app", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
