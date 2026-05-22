@@ -25,7 +25,7 @@ def get_data(filename: str) -> str:
     """gets data from file throws exception if not present"""
     file_path = "data/" + filename
     try:
-        with open(filename, 'r') as f:
+        with open(file_path, 'r') as f:
             data = f.read()
             return data
     except Exception as e:
@@ -33,7 +33,7 @@ def get_data(filename: str) -> str:
         return error
     
 if __name__ == "__main__":
-    get_file_result = get_data("hello.text")
+    get_file_result = get_data("hello.txt")
     print(get_file_result)
     success = store_data("hello.txt", "hi there!")
     if success:
