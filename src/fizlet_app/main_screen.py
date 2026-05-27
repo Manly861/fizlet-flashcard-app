@@ -19,14 +19,16 @@ def main(page: ft.Page):
     page.window.width = 500
     page.bgcolor = background_color
     page.fonts = {
-        "TimesAlternative": "https://gstatic.com"
+        "Time_New_Roman" : "fonts/Times"
     }
 
     fizlet_name_display = ft.Text(
                     "Fizlet",
                     size = 80,
                     color = text_color,
-                    font_family = "TimesAlternative"
+                    italic =  True,
+                    font_family = "Time_New_Roman",
+                    weight= ft.FontWeight.BOLD,
     )
     page.add(fizlet_name_display)
     page.window.resizable = False
