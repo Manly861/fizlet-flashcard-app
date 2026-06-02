@@ -1,23 +1,22 @@
 import flet as ft
-import theme
+import styles
 
 def main(page: ft.Page):
     page.title = "Flascard App"
     page.window.height = 600
     page.window.width = 500
-    page.bgcolor = theme.BACKGROUND_COLOR
+    page.bgcolor = styles.BACKGROUND_COLOR
 
     # fonts dont work
     page.fonts = {
         "Time_New_Roman" : "fonts/Times.ttf"
     }
-    page.update()
     
     fizlet_name_display = ft.Container(
         content = ft.Text(
                 "Fizlet",
                 size = 80,
-                color = theme.TEXT_COLOR,
+                color = styles.TEXT_COLOR,
                 italic =  True,
                 font_family = "Time_New_Roman",
                 weight= ft.FontWeight.BOLD,
@@ -28,8 +27,8 @@ def main(page: ft.Page):
     start_button = ft.Container(
         content = ft.FilledButton(
             "Start", 
-            color= theme.TEXT_START_BUTTON_COLOR,
-            bgcolor = theme.START_BUTTON_COLOR, 
+            color= styles.TEXT_START_BUTTON_COLOR,
+            bgcolor = styles.START_BUTTON_COLOR, 
             style=ft.ButtonStyle(
                 text_style= ft.TextStyle(
                     size = 36,
@@ -63,6 +62,5 @@ def main(page: ft.Page):
     page.window.resizable = False
     page.update()
 
-
 if __name__ == "__main__":
-    ft.app(target=main, assets_dir="assets")
+    ft.run(main, assets_dir="assets")
