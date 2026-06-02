@@ -34,19 +34,17 @@ def main(page: ft.Page):
                     size= 16,
                     italic= True,
                     color= styles.TEXT_COLOR,
-                    text_align= ft.TextAlign.JUSTIFY,
-
+                    text_align= ft.TextAlign.CENTER,
+                    width = 175,
                 ),
             ]
-            
-            
-        
         )
     )
+    page.add(flashcard_folder)    
     page.add(flashcard_folder)
     page.window.resizable = False
     page.update()
 
 if __name__ == "__main__":
-    ft.app(target=main)
+    ft.run(main)
 
