@@ -7,9 +7,6 @@ start_button_color = "#e3913b"
 text_start_button_color = "#000000"
 other_button_color = "#4f00f8"
 box_color = "#362a7f"
-text_fonts = {
-
-}
 
 def main(page: ft.Page):
     page.title = "Flascard App"
@@ -17,9 +14,10 @@ def main(page: ft.Page):
     page.window.width = 500
     page.bgcolor = background_color
     page.fonts = {
-        "Time_New_Roman" : "fonts/Times"
+        "Time_New_Roman" : "fonts/Times.ttf"
     }
-
+    page.update()
+    
     fizlet_name_display = ft.Container(
         content = ft.Text(
                 "Fizlet",
@@ -39,7 +37,7 @@ def main(page: ft.Page):
             bgcolor = start_button_color, 
             style=ft.ButtonStyle(
                 text_style= ft.TextStyle(
-                    size = 26,
+                    size = 36,
                     font_family= "Time_New_Roman",
                     italic= True,
                 ),
@@ -70,4 +68,4 @@ def main(page: ft.Page):
     page.window.resizable = False
     page.update()
 
-ft.app(main)
+ft.app(target=main, assets_dir="assets")
