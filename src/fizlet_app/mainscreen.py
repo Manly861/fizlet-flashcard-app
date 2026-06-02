@@ -1,31 +1,33 @@
 import flet as ft
-import styles
+import styles as st
 
 def main(page: ft.Page):
     page.title = "Main Screen"
-    page.window.height = styles.HEIGHT_SCREEN
-    page.window.width = styles.WIDTH_SCREEN
-    page.bgcolor = styles.BACKGROUND_COLOR
+    page.window.height = st.HEIGHT_SCREEN
+    page.window.width = st.WIDTH_SCREEN
+    page.bgcolor = st.BACKGROUND_COLOR
 
+    # Create a value that display name at the top corner
     name_app_display = ft.Container(
         content= ft.Text(           
             "Fizlet",
             size = 28,
-            color = styles.TEXT_COLOR,
+            color = st.TEXT_COLOR,
             weight= ft.FontWeight.BOLD,
         ),
         alignment=ft.Alignment.TOP_CENTER,
     )
-
+    
+    # Create a folder that appear in the main screen 
+    # and user can interact with
     flashcard_folder = ft.Container(
         content = ft.Column( 
             controls =[
                 ft.Button(
                     content= " ",
-                    bgcolor= styles.BOX_COLOR,
+                    bgcolor= st.BOX_COLOR,
                     style= ft.ButtonStyle(
-                        shape= ft.RoundedRectangleBorder(radius=5),
-                    ),
+                        shape= ft.RoundedRectangleBorder(radius=5)),
                     width = 192,
                     height= 126.7,
                 ),
@@ -33,15 +35,26 @@ def main(page: ft.Page):
                     "Name",
                     size= 16,
                     italic= True,
-                    color= styles.TEXT_COLOR,
+                    color= st.TEXT_COLOR,
                     text_align= ft.TextAlign.CENTER,
                     width = 175,
                 ),
             ]
         )
     )
-    page.add(flashcard_folder)    
-    page.add(flashcard_folder)
+
+    # Create a plus button
+    plus_button = ft.Container(
+        content = ft.ElevatedButton(
+            content= ft.Icon(
+                ft.Icons.ADD, 
+                color= st.TEXT_COLOR,
+            ),
+            bgcolor= st.PLUS_BUTTON_COLOR,
+            style = ft.ButtonStyle(shape= ft.CircleBorder()),
+        ),
+    )
+    page.add(plus_button)
     page.window.resizable = False
     page.update()
 
