@@ -53,8 +53,22 @@ def main(page: ft.Page):
             bgcolor= st.PLUS_BUTTON_COLOR,
             style = ft.ButtonStyle(shape= ft.CircleBorder()),
         ),
+        alignment= ft.Alignment.BOTTOM_CENTER
     )
-    page.add(plus_button)
+
+    main_layout = ft.Container(
+        expand= True,
+        content= ft.Column(
+            controls= [
+                name_app_display,
+                flashcard_folder,
+                plus_button,
+            ],
+            alignment= ft.MainAxisAlignment.SPACE_BETWEEN
+        )
+
+    )
+    page.add(main_layout)
     page.window.resizable = False
     page.update()
 
