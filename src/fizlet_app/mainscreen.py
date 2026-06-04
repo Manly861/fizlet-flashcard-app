@@ -1,6 +1,8 @@
 import flet as ft
 import styles as st
 
+flashcard_set_name = "Name"
+
 def main(page: ft.Page):
     page.title = "Main Screen"
     page.window.height = st.HEIGHT_SCREEN
@@ -32,10 +34,10 @@ def main(page: ft.Page):
                     height= 126.7,
                 ),
                 ft.Text(
-                    "Name",
+                    flashcard_set_name,
                     size= 16,
                     italic= True,
-                    color= st.TEXT_COLOR,
+                    color= st.TEXT_COLOR_1,
                     text_align= ft.TextAlign.CENTER,
                     width = 175,
                 ),

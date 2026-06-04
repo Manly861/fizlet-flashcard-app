@@ -1,11 +1,11 @@
 import flet as ft
-import styles
+import styles as st
 
 def main(page: ft.Page):
-    page.title = "Practicing Screen"
-    page.window.height = styles.HEIGHT_SCREEN
-    page.window.width = styles.WIDTH_SCREEN
-    page.bgcolor = styles.BACKGROUND_COLOR
+    page.title = "Flashcard-set Creating Screen"
+    page.window.height = st.HEIGHT_SCREEN
+    page.window.width = st.WIDTH_SCREEN
+    page.bgcolor = st.BACKGROUND_COLOR
 
 
     page.window.resizable = False
