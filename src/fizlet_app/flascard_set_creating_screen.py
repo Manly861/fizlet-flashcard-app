@@ -10,7 +10,7 @@ def main(page: ft.Page):
 
     # Set initial value for width of the bar
     name_input_bar = st.WIDTH_SCREEN - 25
-    term_and_definition_input_bar = (st.WIDTH_SCREEN / 2) - 40
+    term_and_definition_input_bar = (st.WIDTH_SCREEN / 2) - 45
 
 
     # Display name of the set at the top of the screen
@@ -78,12 +78,24 @@ def main(page: ft.Page):
     input_area_list = ft.ListView(
         expand= True,
         spacing=10,
-        padding=20,
+        padding=ft.Padding.only(top= 10, bottom= 10, left = 0),
         controls=[
-            ft.Text(f"Line {i}", color=ft.Colors.ON_SECONDARY) for i in range(0, 60)
+            ft.Row(
+                controls =[
+                    term_input,
+                    ft.VerticalDivider(
+                        width =20,
+                        thickness = 2,
+                        color= st.TEXT_COLOR_2,
+                    ),
+                    definition_input,
+                ],
+                height = 50,
+                alignment= ft.MainAxisAlignment.CENTER, 
+            ),
+            
         ],
     )
-
     # Create an add button that add a new term_input and definition_input bar
     add_button = ft.Container(
         content = ft.ElevatedButton(
@@ -125,8 +137,12 @@ def main(page: ft.Page):
         expand= True,
         content= ft.Column(
             controls= [
-                input_area_list
+                name_display,
+                name_input,
+                input_area_list,
+                add_button,
             ],
+            horizontal_alignment= ft.CrossAxisAlignment.CENTER,
         )
     )
             
