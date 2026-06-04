@@ -111,7 +111,8 @@ def main(page: ft.Page):
                 padding=ft.Padding.symmetric(horizontal=13, vertical=6),
             ),
         ),
-        alignment= ft.Alignment.BOTTOM_CENTER
+        padding= ft.Padding.only(bottom=10),
+        alignment= ft.Alignment.BOTTOM_CENTER,
     )
 
     # Create a done button that user are done with the creating 
