@@ -59,7 +59,7 @@ def main(page: ft.Page):
     )
 
     main_layout = ft.Container(
-        expand= True,
+        
         content= ft.Column(
             controls= [
                 name_app_display,
