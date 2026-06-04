@@ -98,20 +98,21 @@ def main(page: ft.Page):
     )
     # Create an add button that add a new term_input and definition_input bar
     add_button = ft.Container(
-        content = ft.ElevatedButton(
+        content = ft.Button(
             content= ft.Text(
                  "Add",
                 size = 20,
                 color= st.TEXT_COLOR_1,                
-                weight= ft.FontWeight.BOLD,    
+                weight= ft.FontWeight.BOLD, 
             ),
             bgcolor= st.PLUS_BUTTON_COLOR,
             style = ft.ButtonStyle(
                 shape= ft.RoundedRectangleBorder(radius=8),
+                alignment=ft.Alignment.CENTER,
                 padding=ft.Padding.symmetric(horizontal=13, vertical=6),
             ),
         ),
-        padding= ft.Padding.only(bottom=10),
+        padding= ft.Padding.only(bottom=5),
         alignment= ft.Alignment.BOTTOM_CENTER,
     )
 
@@ -124,20 +125,22 @@ def main(page: ft.Page):
                 size = 12,
                 color= st.TEXT_COLOR_1,                
                 weight= ft.FontWeight.BOLD,    
+                style= ft.TextStyle(ft.TextAlign.CENTER)
             ),
             bgcolor= st.PLUS_BUTTON_COLOR,
             style = ft.ButtonStyle(
                 shape= ft.RoundedRectangleBorder(radius=8),
+                alignment=ft.Alignment.CENTER,
                 padding=ft.Padding.symmetric(horizontal=12, vertical=5),
             ),
         ),
-        alignment= ft.Alignment.CENTER_LEFT
     )
     
     main_layout = ft.Container(
         expand= True,
         content= ft.Column(
             controls= [
+                done_button,
                 name_display,
                 name_input,
                 input_area_list,
