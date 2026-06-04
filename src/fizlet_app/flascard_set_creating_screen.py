@@ -1,11 +1,17 @@
 import flet as ft
 import styles as st
+import mainscreen
 
 def main(page: ft.Page):
     page.title = "Flascard Set Creating Screen"
     page.window.height = st.HEIGHT_SCREEN
     page.window.width = st.WIDTH_SCREEN
     page.bgcolor = st.BACKGROUND_COLOR
+
+    # Display name of the set at the top of the screen
+    name_display = ft.Text(
+        mainscreen.flashcard_set_name
+    )
 
     # Create a name_input bar that ask users for name of the set
     name_input = ft.Container(
@@ -92,10 +98,20 @@ def main(page: ft.Page):
         alignment= ft.Alignment.BOTTOM_CENTER
     )
     
+    main_layout = ft.Container(
+        content= ft.Column(
+            controls= [
+                name_input,
+                ft.Row(
+                    controls= [term_input, definition_input]
+                ),
+                add_button,
+            ]
+        ),
+    )
 
 
-    page.add(add_button)
-    page.add(done_button)
+    page.add(name_display)
     page.window.resizable = False
     page.update()
 
