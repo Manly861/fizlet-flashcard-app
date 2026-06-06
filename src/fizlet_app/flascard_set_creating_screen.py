@@ -73,29 +73,6 @@ def main(page: ft.Page):
         width= term_and_definition_input_bar,
     )
 
-    # Create a area that users can scroll up or down 
-    # if there are many terms and definitions
-    input_area_list = ft.ListView(
-        expand= True,
-        spacing=10,
-        padding=ft.Padding.only(top= 10, bottom= 10, left = 0),
-        controls=[
-            ft.Row(
-                controls =[
-                    term_input,
-                    ft.VerticalDivider(
-                        width =20,
-                        thickness = 2,
-                        color= st.TEXT_COLOR_2,
-                    ),
-                    definition_input,
-                ],
-                height = 50,
-                alignment= ft.MainAxisAlignment.CENTER, 
-            ),
-            
-        ],
-    )
     # Create an add button that add a new term_input and definition_input bar
     add_button = ft.Container(
         content = ft.Button(
@@ -133,15 +110,52 @@ def main(page: ft.Page):
                 alignment=ft.Alignment.CENTER,
                 padding=ft.Padding.symmetric(horizontal=12, vertical=5),
             ),
+            align= ft.Alignment.TOP_RIGHT,
         ),
+    )
+
+    # Create a layout that name_display and done_button would lie on the same lie
+    name_and_done_button_layout = ft.Container(
+        content= ft.Row(
+            alignment= ft.MainAxisAlignment.SPACE_BETWEEN,
+            controls=[
+                ft.Container(width=50), 
+                name_display, 
+                ft.Container(content=done_button, alignment=ft.Alignment.CENTER_RIGHT),
+            ]
+        ),
+        width=name_input_bar,
+    )
+
+    # Create a area that users can scroll up or down 
+    # if there are many terms and definitions
+    input_area_list = ft.ListView(
+        expand= True,
+        spacing=10,
+        padding=ft.Padding.only(top= 10, bottom= 10, left = 0),
+        controls=[
+            ft.Row(
+                controls =[
+                    term_input,
+                    ft.VerticalDivider(
+                        width =20,
+                        thickness = 2,
+                        color= st.TEXT_COLOR_2,
+                    ),
+                    definition_input,
+                ],
+                height = 50,
+                alignment= ft.MainAxisAlignment.CENTER, 
+            ),
+            
+        ],
     )
     
     main_layout = ft.Container(
         expand= True,
         content= ft.Column(
             controls= [
-                done_button,
-                name_display,
+                name_and_done_button_layout,
                 name_input,
                 input_area_list,
                 add_button,
