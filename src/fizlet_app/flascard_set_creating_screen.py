@@ -1,6 +1,5 @@
 import flet as ft
 import styles as st
-import mainscreen
 
 def main(page: ft.Page):
     page.title = "Flascard Set Creating Screen"

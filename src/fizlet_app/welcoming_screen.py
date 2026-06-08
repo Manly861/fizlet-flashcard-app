@@ -1,5 +1,6 @@
 import flet as ft
 import styles
+from mainscreen import main as show_main_screen
 
 def main(page: ft.Page):
     page.title = "Flascard App"
@@ -10,7 +11,8 @@ def main(page: ft.Page):
 
     def get_start(e):
         """moving user to the main screen"""
-        page.go("/mainscreen.py")
+        page.clean()
+        show_main_screen(page)
 
     # fonts dont work
     page.fonts = {
@@ -44,8 +46,8 @@ def main(page: ft.Page):
             ),
             width= 167, 
             height= 91,
+            on_click=get_start,
         ),
-        on_click=get_start,
         alignment= ft.Alignment(0, 0),
     )
 
