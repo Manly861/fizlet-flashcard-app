@@ -14,7 +14,7 @@ def main(page: ft.Page):
         content= ft.Text(           
             "Fizlet",
             size = 28,
-            color = st.TEXT_COLOR,
+            color = st.TEXT_COLOR_1,
             weight= ft.FontWeight.BOLD,
         ),
         alignment=ft.Alignment.TOP_CENTER,
@@ -50,7 +50,7 @@ def main(page: ft.Page):
         content = ft.ElevatedButton(
             content= ft.Icon(
                 ft.Icons.ADD, 
-                color= st.TEXT_COLOR,
+                color= st.TEXT_COLOR_1,
             ),
             bgcolor= st.PLUS_BUTTON_COLOR,
             style = ft.ButtonStyle(shape= ft.CircleBorder()),
