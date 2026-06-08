@@ -55,20 +55,21 @@ def main(page: ft.Page):
 
     # Create a plus button
     plus_button = ft.Container(
-        content = ft.Button(
+        expand= True,
+        content= ft.Button(
             content= ft.Icon(
                 ft.Icons.ADD, 
                 color= st.TEXT_COLOR_1,
             ),
             bgcolor= st.PLUS_BUTTON_COLOR,
-            style = ft.ButtonStyle(shape= ft.CircleBorder()),
+            style= ft.ButtonStyle(shape= ft.CircleBorder()),
             on_click= direct_user,
         ),
         alignment= ft.Alignment.BOTTOM_CENTER
     )
 
     main_layout = ft.Container(
-        
+        expand= True,
         content= ft.Column(
             controls= [
                 name_app_display,
