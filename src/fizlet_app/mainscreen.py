@@ -47,7 +47,7 @@ def main(page: ft.Page):
 
     # Create a plus button
     plus_button = ft.Container(
-        content = ft.ElevatedButton(
+        content = ft.Button(
             content= ft.Icon(
                 ft.Icons.ADD, 
                 color= st.TEXT_COLOR_1,

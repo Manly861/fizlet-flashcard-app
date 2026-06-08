@@ -54,7 +54,6 @@ def main(page: ft.Page):
         ),
         alignment= ft.Alignment.CENTER,
         expand= True,
-
     )
 
     page.add(main_layout)
