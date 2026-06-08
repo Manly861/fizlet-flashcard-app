@@ -32,7 +32,6 @@ def main(page: ft.Page):
 
     # Create a flashcard for displaying
     flascard_display = ft.Container(
-        content=,
     )
 
     # Create a next button

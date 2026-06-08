@@ -7,6 +7,11 @@ def main(page: ft.Page):
     page.window.width = 500
     page.bgcolor = styles.BACKGROUND_COLOR
 
+
+    def get_start(e):
+        """moving user to the main screen"""
+        page.go("/mainscreen.py")
+
     # fonts dont work
     page.fonts = {
         "Time_New_Roman" : "fonts/Times.ttf"
@@ -16,7 +21,7 @@ def main(page: ft.Page):
         content = ft.Text(
                 "Fizlet",
                 size = 80,
-                color = styles.TEXT_COLOR,
+                color = styles.TEXT_COLOR_1,
                 italic =  True,
                 font_family = "Time_New_Roman",
                 weight= ft.FontWeight.BOLD,
@@ -40,6 +45,7 @@ def main(page: ft.Page):
             width= 167, 
             height= 91,
         ),
+        on_click=get_start,
         alignment= ft.Alignment(0, 0),
     )
 
