@@ -1,13 +1,21 @@
 import flet as ft
 import styles as st
+from flascard_set_creating_screen import main as show_set_creating_screen
 
 flashcard_set_name = "Name"
+
+def direct_user(e):
+    page.clean()
 
 def main(page: ft.Page):
     page.title = "Main Screen"
     page.window.height = st.HEIGHT_SCREEN
     page.window.width = st.WIDTH_SCREEN
     page.bgcolor = st.BACKGROUND_COLOR
+
+    def direct_user(e):
+        page.clean()
+        show_set_creating_screen(page)
 
     # Create a value that display name at the top corner
     name_app_display = ft.Container(
@@ -54,6 +62,7 @@ def main(page: ft.Page):
             ),
             bgcolor= st.PLUS_BUTTON_COLOR,
             style = ft.ButtonStyle(shape= ft.CircleBorder()),
+            on_click= direct_user,
         ),
         alignment= ft.Alignment.BOTTOM_CENTER
     )

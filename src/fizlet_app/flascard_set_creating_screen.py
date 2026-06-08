@@ -1,6 +1,5 @@
 import flet as ft
 import styles as st
-
 def main(page: ft.Page):
     page.title = "Flascard Set Creating Screen"
     page.window.height = st.HEIGHT_SCREEN
@@ -15,7 +14,7 @@ def main(page: ft.Page):
     # Display name of the set at the top of the screen
     name_display = ft.Container(
         ft.Text(
-            mainscreen.flashcard_set_name,
+            "Almost Done, Ya hu",
             size = 24,
             color = st.TEXT_COLOR_1,
             weight= ft.FontWeight.BOLD,
