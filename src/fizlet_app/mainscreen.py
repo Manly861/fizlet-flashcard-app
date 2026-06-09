@@ -1,11 +1,9 @@
 import flet as ft
 import styles as st
+import time
 from flascard_set_creating_screen import main as show_set_creating_screen
 
 flashcard_set_name = "Name"
-
-def direct_user(e):
-    page.clean()
 
 def main(page: ft.Page):
     page.title = "Main Screen"
@@ -16,7 +14,11 @@ def main(page: ft.Page):
 
     def direct_user(e):
         page.clean()
-        show_set_creating_screen(page)
+        time.sleep(0.5)
+        show_set_creating_screen(page, on_go_back=main)
+    
+    # Create a intial value to display in the screen
+    main_screen_list = []
 
     # Create a value that display name at the top corner
     name_app_display = ft.Container(

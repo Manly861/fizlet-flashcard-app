@@ -1,16 +1,40 @@
 import flet as ft
 import styles as st
-def main(page: ft.Page):
+def main(page: ft.Page, on_go_back=None):
     page.title = "Flascard Set Creating Screen"
     page.window.height = st.HEIGHT_SCREEN
     page.window.width = st.WIDTH_SCREEN
     page.bgcolor = st.BACKGROUND_COLOR
     page.fonts = st.APP_FONTS
 
+    def add_term_and_definition(e):
+        print("CLICKED")
+        is_clicked = True
+        while is_clicked:
+            print("1")
+            is_clicked = False
+
+    def process_input(e):
+        page.clean()
+        flashcard_set = {
+            "name": str(name_input.value),
+            "vocab_set": [ 
+                {
+                    "term": str(term_input.value),
+                    "definiton": str(definition_input.value)
+                }
+            ]        
+        }
+        main_screen_list.append(flashcard_set)
+        print(main_screen_list)
+        if on_go_back:
+            on_go_back(page)
+        
+
     # Set initial value for width of the bar
+    main_screen_list = []
     name_input_bar = st.WIDTH_SCREEN - 25
     term_and_definition_input_bar = (st.WIDTH_SCREEN / 2) - 45
-
 
     # Display name of the set at the top of the screen
     name_display = ft.Container(
@@ -25,25 +49,23 @@ def main(page: ft.Page):
     )
     
     # Create a name_input bar that ask users for name of the set
-    name_input = ft.Container(
-        ft.TextField(
-            label= "Name",
-            label_style= ft.TextStyle(
-                color= st.TEXT_COLOR_1,
-                weight= ft.FontWeight.BOLD,
-                font_family= st.PRIMARY_FONT,),
-            hint_text= "Enter A Name For This Set",
-            hint_style= ft.TextStyle(
-                color= st.TEXT_COLOR_2, 
-                italic= True,
-                font_family= st.PRIMARY_FONT),                  
-            bgcolor= st.BOX_COLOR,
-            border_color= st.BOX_COLOR,
-            border_radius= 10,
-            width= name_input_bar,
-        ),
-        alignment= ft.Alignment.CENTER,
+    name_input = ft.TextField(
+        label= "Name",
+        label_style= ft.TextStyle(
+            color= st.TEXT_COLOR_1,
+            weight= ft.FontWeight.BOLD,
+            font_family= st.PRIMARY_FONT,),
+        hint_text= "Enter A Name For This Set",
+        hint_style= ft.TextStyle(
+            color= st.TEXT_COLOR_2, 
+            italic= True,
+            font_family= st.PRIMARY_FONT),                  
+        bgcolor= st.BOX_COLOR,
+        border_color= st.BOX_COLOR,
+        border_radius= 10,
+        width= name_input_bar,
     )
+
     
     # Create a term_input bar that ask users for value of the term
     term_input = ft.TextField(
@@ -94,6 +116,7 @@ def main(page: ft.Page):
                 alignment=ft.Alignment.CENTER,
                 padding=ft.Padding.symmetric(horizontal=13, vertical=6),
             ),
+            on_click=add_term_and_definition,
         ),
         padding= ft.Padding.only(bottom=5),
         alignment= ft.Alignment.BOTTOM_CENTER,
@@ -117,6 +140,7 @@ def main(page: ft.Page):
                 alignment=ft.Alignment.CENTER,
                 padding=ft.Padding.symmetric(horizontal=12, vertical=5),
             ),
+            on_click= process_input,
             align= ft.Alignment.TOP_RIGHT,
         ),
     )
@@ -153,8 +177,7 @@ def main(page: ft.Page):
                 ],
                 height = 50,
                 alignment= ft.MainAxisAlignment.CENTER, 
-            ),
-            
+            ), 
         ],
     )
     
