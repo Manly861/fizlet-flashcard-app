@@ -1,5 +1,9 @@
 import flet as ft
-import styles
+import styles, time
+import os
+
+print(os.path.exists("assets/fonts/Times.ttf"))
+print(os.getcwd())
 from mainscreen import main as show_main_screen
 
 def main(page: ft.Page):
@@ -7,17 +11,13 @@ def main(page: ft.Page):
     page.window.height = 600
     page.window.width = 500
     page.bgcolor = styles.BACKGROUND_COLOR
-
+    page.fonts = styles.APP_FONTS
 
     def get_start(e):
         """moving user to the main screen"""
         page.clean()
+        time.sleep(0.5)
         show_main_screen(page)
-
-    # fonts dont work
-    page.fonts = {
-        "Time_New_Roman" : "fonts/Times.ttf"
-    }
     
     fizlet_name_display = ft.Container(
         content = ft.Text(
@@ -25,7 +25,7 @@ def main(page: ft.Page):
                 size = 80,
                 color = styles.TEXT_COLOR_1,
                 italic =  True,
-                font_family = "Time_New_Roman",
+                font_family = styles.PRIMARY_FONT,
                 weight= ft.FontWeight.BOLD,
             ),
         alignment= ft.Alignment(0, -0.25),
@@ -39,7 +39,7 @@ def main(page: ft.Page):
             style=ft.ButtonStyle(
                 text_style= ft.TextStyle(
                     size = 36,
-                    font_family= "Time_New_Roman",
+                    font_family= styles.PRIMARY_FONT,
                     italic= True,
                 ),
                 shape= ft.RoundedRectangleBorder(radius=10)
