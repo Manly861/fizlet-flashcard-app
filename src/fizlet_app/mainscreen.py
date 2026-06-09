@@ -19,8 +19,11 @@ def main(page: ft.Page):
         show_set_creating_screen(page, on_go_back=main)
     
     # Create a intial value to display in the screen
-    main_screen_list = []
-    main_screen_list.append(controller.get_data)
+    main_screen_list = controller.get_flashcard_set_list()
+    print(main_screen_list)
+    for item in main_screen_list:
+        print(controller.get_data(str(item.name)))
+
     # Create a value that display name at the top corner
     name_app_display = ft.Container(
         content= ft.Text(           
