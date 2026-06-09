@@ -1,6 +1,7 @@
 import flet as ft
 import styles as st
 import time
+import controller
 from flascard_set_creating_screen import main as show_set_creating_screen
 
 flashcard_set_name = "Name"
@@ -19,7 +20,7 @@ def main(page: ft.Page):
     
     # Create a intial value to display in the screen
     main_screen_list = []
-
+    main_screen_list.append(controller.get_data)
     # Create a value that display name at the top corner
     name_app_display = ft.Container(
         content= ft.Text(           

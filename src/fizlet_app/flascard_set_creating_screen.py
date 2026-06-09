@@ -1,5 +1,6 @@
 import flet as ft
 import styles as st
+import controller
 def main(page: ft.Page, on_go_back=None):
     page.title = "Flascard Set Creating Screen"
     page.window.height = st.HEIGHT_SCREEN
@@ -26,7 +27,11 @@ def main(page: ft.Page, on_go_back=None):
             ]        
         }
         main_screen_list.append(flashcard_set)
+        for item in main_screen_list:
+            file_name = item.get("name").strip() + ".json"
+            result = controller.store_data(file_name, item)
         print(main_screen_list)
+
         if on_go_back:
             on_go_back(page)
         
