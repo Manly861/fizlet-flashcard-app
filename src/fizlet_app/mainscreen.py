@@ -4,7 +4,6 @@ import time
 import controller
 from flascard_set_creating_screen import main as show_set_creating_screen
 
-flashcard_set_name = "Name"
 
 def main(page: ft.Page):
     page.title = "Main Screen"
@@ -20,9 +19,17 @@ def main(page: ft.Page):
     
     # Create a intial value to display in the screen
     main_screen_list = controller.get_flashcard_set_list()
+    flashcard_set_name = []
     print(main_screen_list)
     for item in main_screen_list:
-        print(controller.get_data(str(item.name)))
+        name_set = ""
+        for index in item.name:
+            if index == ".":
+                break
+            else:
+                name_set += index
+        flashcard_set_name.append(name_set)
+        print(flashcard_set_name)
 
     # Create a value that display name at the top corner
     name_app_display = ft.Container(
@@ -50,7 +57,7 @@ def main(page: ft.Page):
                     height= 126.7,
                 ),
                 ft.Text(
-                    flashcard_set_name,
+                    flashcard_set_name[1],
                     size= 16,
                     font_family= st.PRIMARY_FONT,
                     italic= True,
