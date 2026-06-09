@@ -5,6 +5,7 @@ def main(page: ft.Page):
     page.window.height = st.HEIGHT_SCREEN
     page.window.width = st.WIDTH_SCREEN
     page.bgcolor = st.BACKGROUND_COLOR
+    page.fonts = st.APP_FONTS
 
     # Set initial value for width of the bar
     name_input_bar = st.WIDTH_SCREEN - 25
@@ -17,6 +18,7 @@ def main(page: ft.Page):
             "Almost Done, Ya hu",
             size = 24,
             color = st.TEXT_COLOR_1,
+            font_family= st.PRIMARY_FONT,
             weight= ft.FontWeight.BOLD,
         ),
         alignment=ft.Alignment.TOP_CENTER,
@@ -28,11 +30,13 @@ def main(page: ft.Page):
             label= "Name",
             label_style= ft.TextStyle(
                 color= st.TEXT_COLOR_1,
-                weight= ft.FontWeight.BOLD),
+                weight= ft.FontWeight.BOLD,
+                font_family= st.PRIMARY_FONT,),
             hint_text= "Enter A Name For This Set",
             hint_style= ft.TextStyle(
                 color= st.TEXT_COLOR_2, 
-                italic= True),                  
+                italic= True,
+                font_family= st.PRIMARY_FONT),                  
             bgcolor= st.BOX_COLOR,
             border_color= st.BOX_COLOR,
             border_radius= 10,
@@ -46,11 +50,13 @@ def main(page: ft.Page):
         label= "Term",
         label_style= ft.TextStyle(
             color= st.TEXT_COLOR_1,
-            weight= ft.FontWeight.BOLD),
+            weight= ft.FontWeight.BOLD,
+            font_family= st.PRIMARY_FONT),
         hint_text= "Enter The Term.",
         hint_style= ft.TextStyle(
             color= st.TEXT_COLOR_2, 
-            italic= True),                  
+            italic= True,
+            font_family= st.PRIMARY_FONT),                  
         bgcolor= st.BOX_COLOR,
         border_color= st.BOX_COLOR,
         width= term_and_definition_input_bar,
@@ -61,11 +67,13 @@ def main(page: ft.Page):
         label= "Definition",
         label_style= ft.TextStyle(
             color= st.TEXT_COLOR_1,
-            weight= ft.FontWeight.BOLD),
+            weight= ft.FontWeight.BOLD,
+            font_family= st.PRIMARY_FONT),
         hint_text= "Enter The Definition.",
         hint_style= ft.TextStyle(
             color= st.TEXT_COLOR_2, 
-            italic= True),                  
+            italic= True,
+            font_family= st.PRIMARY_FONT),                  
         bgcolor= st.BOX_COLOR,
         border_color= st.BOX_COLOR,
         width= term_and_definition_input_bar,
@@ -100,7 +108,8 @@ def main(page: ft.Page):
                 size = 12,
                 color= st.TEXT_COLOR_1,                
                 weight= ft.FontWeight.BOLD,    
-                style= ft.TextStyle(ft.TextAlign.CENTER)
+                style= ft.TextStyle(ft.TextAlign.CENTER),
+                font_family= st.PRIMARY_FONT,
             ),
             bgcolor= st.PLUS_BUTTON_COLOR,
             style = ft.ButtonStyle(

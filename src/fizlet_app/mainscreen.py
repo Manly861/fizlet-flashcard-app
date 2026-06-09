@@ -12,6 +12,7 @@ def main(page: ft.Page):
     page.window.height = st.HEIGHT_SCREEN
     page.window.width = st.WIDTH_SCREEN
     page.bgcolor = st.BACKGROUND_COLOR
+    page.fonts = st.APP_FONTS
 
     def direct_user(e):
         page.clean()
@@ -22,6 +23,7 @@ def main(page: ft.Page):
         content= ft.Text(           
             "Fizlet",
             size = 28,
+            font_family= st.PRIMARY_FONT,
             color = st.TEXT_COLOR_1,
             weight= ft.FontWeight.BOLD,
         ),
@@ -44,6 +46,7 @@ def main(page: ft.Page):
                 ft.Text(
                     flashcard_set_name,
                     size= 16,
+                    font_family= st.PRIMARY_FONT,
                     italic= True,
                     color= st.TEXT_COLOR_1,
                     text_align= ft.TextAlign.CENTER,

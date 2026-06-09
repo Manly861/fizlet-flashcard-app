@@ -15,6 +15,7 @@ APP_FONTS = {
     "Bold_Italic_Times" : "/fonts/timesbi_0.ttf",
 }
 PRIMARY_FONT = "Normal_Times"
+LOGO_DISPLAY_FONT = "Bold_Times"
 
 
 # width and length that use for main scree, practicing_screen, 

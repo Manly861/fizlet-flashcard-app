@@ -7,12 +7,14 @@ def main(page: ft.Page):
     page.window.height = st.HEIGHT_SCREEN
     page.window.width = st.WIDTH_SCREEN
     page.bgcolor = st.BACKGROUND_COLOR
+    page.fonts = st.APP_FONTS
 
     # Display name of the set at the top of the screen
     name_display = ft.Container(
         ft.Text(
             mainscreen.flashcard_set_name,
             size = 24,
+            font_family= st.PRIMARY_FONT,
             color = st.TEXT_COLOR_1,
             weight= ft.FontWeight.BOLD,
         ),
