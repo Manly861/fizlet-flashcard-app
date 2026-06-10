@@ -7,6 +7,7 @@ from practicing_screen import main as direct_user_to_practice_screen
 
 
 def main(page: ft.Page):
+    
 
     def is_set_clicked(e):
         print("CLICKED")

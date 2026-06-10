@@ -39,7 +39,7 @@ def main(page: ft.Page, on_go_back=None):
             vocab_set.append(
                 {
                     "term": str(term_input.value),
-                    "definiton": str(definition_input.value)
+                    "definition": str(definition_input.value)
                 }
             )
         flashcard_set = {

@@ -6,7 +6,6 @@ import controller, congratulation_screen, json
 flash_card_width = 600
 flash_card_height = 350
 animation_speed = 350
-current_index = 0
 
 def main(page: ft.Page, on_go_back=None, set_chosen = ""):
     page.title = "Flashcard Set Creating Screen"
@@ -29,13 +28,14 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
         page.update()
 
     def move_on_to_next_card(e):
-        print("CLICKED and MOVING")
+        """Move user to the next card"""
+        print("CLICKED and MOVING ON")
         global current_index
         current_index += 1
         try:
             print(f"Current card is", {selected_set["vocab_set"][current_index]["term"]})
             term_text_display.value = selected_set["vocab_set"][current_index]["term"]
-            definition_text_display.value = selected_set["vocab_set"][current_index]["definiton"]
+            definition_text_display.value = selected_set["vocab_set"][current_index]["definition"]
             term_side.opacity = 1.0
             definition_side.opacity = 0.0
             page.update()
@@ -43,8 +43,27 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
             page.clean()
             congratulation_screen.main(page)
             page.update()
-            
+
+    def move_back_to_previous_card(e):
+        """move user back to the previous card"""
+        print("CLICKED and MOVING BACK")
+        global current_index
+        current_index -= 1
+        try:
+            print(f"Current card is", {selected_set["vocab_set"][current_index]["term"]})
+            term_text_display.value = selected_set["vocab_set"][current_index]["term"]
+            definition_text_display.value = selected_set["vocab_set"][current_index]["definition"]
+            term_side.opacity = 1.0
+            definition_side.opacity = 0.0
+            page.update()
+        except IndexError:
+            page.clean()
+            main(page)
+            page.update()
+ 
     # retreive the data of chosen flashcard set
+    global current_index
+    current_index = 0
     selected_set = controller.get_data(str(set_chosen))
     selected_set = json.loads(selected_set)
 
@@ -72,7 +91,7 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
         ),
     )
 
-    # Create a term (front) and  definition (back) side of the flashcard for displaying
+    # Create a term (front) side of the flashcard for displaying
     term_text_display = ft.Text(
         selected_set["vocab_set"][current_index]["term"],
         color= st.TEXT_COLOR_1,
@@ -98,9 +117,9 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
         padding= ft.Padding.only(top=30,left=20),
     )
 
-    #
+    # # Create a definition (back) side of the flashcard for displaying
     definition_text_display = ft.Text(
-        selected_set["vocab_set"][current_index]["definiton"],
+        selected_set["vocab_set"][current_index]["definition"],
         color= st.TEXT_COLOR_1,
         size= 80,
         style= ft.TextStyle(ft.TextAlign.CENTER)
@@ -124,15 +143,15 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
     )
 
     # Create a layout for a flash card
-    flashcard_layout = ft.Stack([term_side, definition_side])
+    flashcard_layout = ft.Stack([term_side, definition_side]) # mouse_cursor=ft.MouseCursor.CLICK)
     
-    # Create a next button
+    # Create a next button that move user to next flashcard
     next_button = ft.Container(
         expand= True,
         padding= ft.Padding.only(left=20, bottom=35),
         content= ft.Button(
             content= ft.Icon(
-                ft.Icons.FORWARD, 
+                ft.Icons.ARROW_FORWARD, 
                 color= st.TEXT_COLOR_1,
                 scale= 1.5,
             ),
@@ -142,6 +161,24 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
         ),
         alignment= ft.Alignment.BOTTOM_CENTER,
         on_click= move_on_to_next_card,
+    )
+
+    # Create a next button that move user to next flashcard
+    previous_button = ft.Container(
+        expand= True,
+        padding= ft.Padding.only(left=20, bottom=35),
+        content= ft.Button(
+            content= ft.Icon(
+                ft.Icons.ARROW_BACK, 
+                color= st.TEXT_COLOR_1,
+                scale= 1.5,
+            ),
+            disabled= True,
+            bgcolor= st.PLUS_BUTTON_COLOR,
+            style= ft.ButtonStyle(shape= ft.RoundedRectangleBorder(radius=5)),
+        ),
+        alignment= ft.Alignment.BOTTOM_CENTER,
+        on_click= move_back_to_previous_card,
     )
     
     # create a layout that home button and name will lie in a same line
@@ -164,7 +201,7 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
             controls= [
                 name_and_home_button_layout,
                 flashcard_layout,
-                next_button,
+                ft.Row([previous_button, next_button])
             ], 
         ), 
     )
