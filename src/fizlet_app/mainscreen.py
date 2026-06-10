@@ -6,30 +6,34 @@ from flascard_set_creating_screen import main as show_set_creating_screen
 
 
 def main(page: ft.Page):
+    def direct_user(e):
+        """direct users to set-creating screen"""
+        page.clean()
+        time.sleep(0.5)
+        show_set_creating_screen(page, on_go_back=main)
+
     page.title = "Main Screen"
     page.window.height = st.HEIGHT_SCREEN
     page.window.width = st.WIDTH_SCREEN
     page.bgcolor = st.BACKGROUND_COLOR
     page.fonts = st.APP_FONTS
-
-    def direct_user(e):
-        page.clean()
-        time.sleep(0.5)
-        show_set_creating_screen(page, on_go_back=main)
     
     # Create a intial value to display in the screen
-    main_screen_list = controller.get_flashcard_set_list()
-    flashcard_set_name = []
-    print(main_screen_list)
-    for item in main_screen_list:
-        name_set = ""
-        for index in item.name:
-            if index == ".":
-                break
-            else:
-                name_set += index
-        flashcard_set_name.append(name_set)
-        print(flashcard_set_name)
+    def retreive_and_return_name_of_the_set():
+        created_set_list = controller.get_flashcard_set_list()
+        name_of_sets_list = []
+        for item in created_set_list:
+            name_set = ""
+            for index in item.name:
+                if index == ".":
+                    break
+                else:
+                    name_set += index
+            name_of_sets_list.append(name_set)
+        return name_of_sets_list
+    
+    # Recall function to create a list of flashcard sets' name
+    flashcard_set_name_list = retreive_and_return_name_of_the_set()
 
     # Create a value that display name at the top corner
     name_app_display = ft.Container(
@@ -43,31 +47,34 @@ def main(page: ft.Page):
         alignment=ft.Alignment.TOP_CENTER,
     )
     
-    # Create a folder that appear in the main screen 
+    # Create folders that appear in the main screen 
     # and user can interact with
-    flashcard_folder = ft.Container(
-        content = ft.Column( 
-            controls =[
-                ft.Button(
-                    content= " ",
-                    bgcolor= st.BOX_COLOR,
-                    style= ft.ButtonStyle(
-                        shape= ft.RoundedRectangleBorder(radius=5)),
-                    width = 192,
-                    height= 126.7,
-                ),
-                ft.Text(
-                    flashcard_set_name[1],
-                    size= 16,
-                    font_family= st.PRIMARY_FONT,
-                    italic= True,
-                    color= st.TEXT_COLOR_1,
-                    text_align= ft.TextAlign.CENTER,
-                    width = 175,
-                ),
-            ]
+    flascard_set_list = []
+    for set_index in range(len(flashcard_set_name_list)):
+        flashcard_folder = ft.Container(
+            content = ft.Column( 
+                controls =[
+                    ft.Button(
+                        content= " ",
+                        bgcolor= st.BOX_COLOR,
+                        style= ft.ButtonStyle(
+                            shape= ft.RoundedRectangleBorder(radius=5)),
+                        width = 192,
+                        height= 126.7,
+                    ),
+                    ft.Text(
+                        flashcard_set_name_list[set_index],
+                        size= 16,
+                        font_family= st.PRIMARY_FONT,
+                        italic= True,
+                        color= st.TEXT_COLOR_1,
+                        text_align= ft.TextAlign.CENTER,
+                        width = 175,
+                    ),
+                ]
+            )
         )
-    )
+        flascard_set_list.append(flashcard_folder)    
 
     # Create a plus button
     plus_button = ft.Container(
@@ -89,7 +96,7 @@ def main(page: ft.Page):
         content= ft.Column(
             controls= [
                 name_app_display,
-                flashcard_folder,
+                ft.Row(flascard_set_list),
                 plus_button,
             ],
             alignment= ft.MainAxisAlignment.SPACE_BETWEEN
