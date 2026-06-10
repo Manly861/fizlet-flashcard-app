@@ -3,14 +3,39 @@ import styles as st
 import time
 import controller
 from flascard_set_creating_screen import main as show_set_creating_screen
+from practicing_screen import main as direct_to_practice_screen
 
 
 def main(page: ft.Page):
+    def is_set_clicked(e):
+        print("CLICKED")
+        text_control = e.control.content.controls[1]
+        name_set_chosen = text_control.value + ".json"
+        print(f"It is {name_set_chosen}")
+        time.sleep(0.5)
+        page.clean()
+        direct_to_practice_screen(page, on_go_back=main)
+        page.update()
+
     def direct_user(e):
         """direct users to set-creating screen"""
         page.clean()
         time.sleep(0.5)
         show_set_creating_screen(page, on_go_back=main)
+    
+    def retreive_and_return_name_of_the_set():
+        """retreiving saved data and display in this screen"""
+        created_set_list = controller.get_flashcard_set_list()
+        name_of_sets_list = []
+        for item in created_set_list:
+            name_set = ""
+            for index in item.name:
+                if index == ".":
+                    break
+                else:
+                    name_set += index
+            name_of_sets_list.append(name_set)
+        return name_of_sets_list
 
     page.title = "Main Screen"
     page.window.height = st.HEIGHT_SCREEN
@@ -18,8 +43,8 @@ def main(page: ft.Page):
     page.bgcolor = st.BACKGROUND_COLOR
     page.fonts = st.APP_FONTS
     
-    # Create a intial value to display in the screen
     def retreive_and_return_name_of_the_set():
+        """retreiving saved data and display in this screen"""
         created_set_list = controller.get_flashcard_set_list()
         name_of_sets_list = []
         for item in created_set_list:
@@ -62,6 +87,7 @@ def main(page: ft.Page):
                             shape= ft.RoundedRectangleBorder(radius=5)),
                         width = 200,
                         height= 130,
+                        disabled= True,
                     ),
                     ft.Text(
                         flashcard_set_name_list[set_index],
@@ -73,7 +99,8 @@ def main(page: ft.Page):
                         text_align= ft.TextAlign.CENTER,  
                     ),
                 ]
-            )
+            ),
+            on_click=is_set_clicked,
         )
         flascard_set_list.append(flashcard_folder)    
 

@@ -1,9 +1,8 @@
 import flet as ft
 import styles as st
 import controller, time
-from mainscreen import main as show_main_screen
 
-def main(page: ft.Page):
+def main(page: ft.Page, on_go_back=None):
     page.title = "Flashcard Set Creating Screen"
     page.window.height = st.HEIGHT_SCREEN
     page.window.width = st.WIDTH_SCREEN
@@ -12,9 +11,9 @@ def main(page: ft.Page):
 
     def go_back(e):
         """direct user back to main screen"""
-        page.clean()
-        time.sleep(0.5)
-        show_main_screen(page)
+        if on_go_back:
+            on_go_back(page)
+        page.update()
     
     def show_side_of_card(e):
         print("CLICKED")
