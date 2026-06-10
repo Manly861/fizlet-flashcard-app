@@ -10,4 +10,4 @@ Need to do
 ADD:
 may add a notification when they are waiting to be directed
 adding notification when the name input is empty
-    
+issue with dot in name 

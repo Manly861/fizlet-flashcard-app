@@ -32,13 +32,17 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
         print("CLICKED and MOVING")
         global current_index
         current_index += 1
-        print(f"Current card is", {selected_set["vocab_set"][current_index]["term"]})
-        term_text_display.value = selected_set["vocab_set"][current_index]["term"]
-        definition_text_display.value = selected_set["vocab_set"][current_index]["definiton"]
-        term_side.opacity = 1.0
-        definition_side.opacity = 0.0
-        page.update()
-
+        try:
+            print(f"Current card is", {selected_set["vocab_set"][current_index]["term"]})
+            term_text_display.value = selected_set["vocab_set"][current_index]["term"]
+            definition_text_display.value = selected_set["vocab_set"][current_index]["definiton"]
+            term_side.opacity = 1.0
+            definition_side.opacity = 0.0
+            page.update()
+        except IndexError:
+            page.clean()
+            page.add(congratulation_layout)
+            page.update()
     #
     selected_set = controller.get_data(str(set_chosen))
     selected_set = json.loads(selected_set)
@@ -164,7 +168,17 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
         ), 
     )
 
-    page.add(main_layout)
+    # Add another layout that congrats to them
+    congratulation_layout = ft.Container(
+        content= ft.Text(
+            "You are Done, Great Job!",
+            size= 150,
+            color= st.TEXT_COLOR_1,
+            font_family= st.PRIMARY_FONT,
+        )
+    )
+
+    page.add(congratulation_layout)
     page.window.resizable = False
     page.update()
 

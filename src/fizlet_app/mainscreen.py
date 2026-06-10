@@ -138,6 +138,7 @@ def main(page: ft.Page):
             alignment= ft.MainAxisAlignment.SPACE_BETWEEN
         )
     )
+    
     page.add(main_layout)
     page.window.resizable = False
     page.update()
