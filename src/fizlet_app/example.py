@@ -1,6 +1,6 @@
 import flet as ft
 import styles as st
-import time
+import asyncio
 
 def main(page: ft.Page):
     page.title = "Flashcard Set Creating Screen"
@@ -8,7 +8,9 @@ def main(page: ft.Page):
     page.window.width = st.WIDTH_SCREEN
     page.bgcolor = st.BACKGROUND_COLOR
     page.fonts = st.APP_FONTS
+        
 
+   
 
     count_down_display = ft.Text(
         "3",
@@ -19,6 +21,12 @@ def main(page: ft.Page):
         text_align= ft.TextAlign.CENTER,
     )
 
+    async def count_down():
+        for i in range(3, -1, -1):
+            count_down_display.value = str(i)
+            await asyncio.sleep(1)
+            page.update()
+    
     congratulation_layout = ft.Container(
         expand= True,
         alignment= ft.Alignment(0, -0.25),
@@ -50,8 +58,6 @@ def main(page: ft.Page):
     page.window.resizable = False
     page.update()
 
-    for i in range(3, 0, -1):
-        time.sleep(1)
-        count_down_display.value = str(i)
-        page.update()
+    page.run_task(count_down)
+    
 ft.run(main)
