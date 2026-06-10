@@ -16,7 +16,6 @@ def main(page: ft.Page, on_go_back=None):
             is_clicked = False
 
     def process_input(e):
-        page.clean()
         flashcard_set = {
             "name": str(name_input.value),
             "vocab_set": [ 
@@ -31,11 +30,11 @@ def main(page: ft.Page, on_go_back=None):
             file_name = item.get("name").strip() + ".json"
             result = controller.store_data(file_name, item)
         print(main_screen_list)
-
+        page.clean()
         if on_go_back:
             on_go_back(page)
+        page.update()
         
-
     # Set initial value for width of the bar
     main_screen_list = []
     name_input_bar = st.WIDTH_SCREEN - 25
@@ -64,7 +63,8 @@ def main(page: ft.Page, on_go_back=None):
         hint_style= ft.TextStyle(
             color= st.TEXT_COLOR_2, 
             italic= True,
-            font_family= st.PRIMARY_FONT),                  
+            font_family= st.PRIMARY_FONT),        
+        color= st.TEXT_COLOR_2,          
         bgcolor= st.BOX_COLOR,
         border_color= st.BOX_COLOR,
         border_radius= 10,
@@ -83,7 +83,8 @@ def main(page: ft.Page, on_go_back=None):
         hint_style= ft.TextStyle(
             color= st.TEXT_COLOR_2, 
             italic= True,
-            font_family= st.PRIMARY_FONT),                  
+            font_family= st.PRIMARY_FONT),  
+        color= st.TEXT_COLOR_2,                  
         bgcolor= st.BOX_COLOR,
         border_color= st.BOX_COLOR,
         width= term_and_definition_input_bar,
@@ -100,7 +101,8 @@ def main(page: ft.Page, on_go_back=None):
         hint_style= ft.TextStyle(
             color= st.TEXT_COLOR_2, 
             italic= True,
-            font_family= st.PRIMARY_FONT),                  
+            font_family= st.PRIMARY_FONT),
+        color= st.TEXT_COLOR_2,                    
         bgcolor= st.BOX_COLOR,
         border_color= st.BOX_COLOR,
         width= term_and_definition_input_bar,

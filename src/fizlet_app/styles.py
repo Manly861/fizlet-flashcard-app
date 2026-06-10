@@ -7,7 +7,7 @@ TEXT_START_BUTTON_COLOR = "#000000"
 PLUS_BUTTON_COLOR = "#4f00f8"
 BOX_COLOR = "#362a7f"
 
-# Adding fonts
+# Fonts
 APP_FONTS = {
     "Normal_Times" : "/fonts/times_0.ttf",
     "Bold_Times" : "/fonts/timesbd_0.ttf",
@@ -16,7 +16,6 @@ APP_FONTS = {
 }
 PRIMARY_FONT = "Normal_Times"
 LOGO_DISPLAY_FONT = "Bold_Times"
-
 
 # width and length that use for main scree, practicing_screen, 
 # and flascard_set_creating_screen

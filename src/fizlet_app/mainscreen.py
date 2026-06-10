@@ -52,6 +52,7 @@ def main(page: ft.Page):
     flascard_set_list = []
     for set_index in range(len(flashcard_set_name_list)):
         flashcard_folder = ft.Container(
+            padding= ft.Padding.only(left= 25, bottom=15),
             content = ft.Column( 
                 controls =[
                     ft.Button(
@@ -59,8 +60,8 @@ def main(page: ft.Page):
                         bgcolor= st.BOX_COLOR,
                         style= ft.ButtonStyle(
                             shape= ft.RoundedRectangleBorder(radius=5)),
-                        width = 192,
-                        height= 126.7,
+                        width = 200,
+                        height= 130,
                     ),
                     ft.Text(
                         flashcard_set_name_list[set_index],
@@ -68,10 +69,12 @@ def main(page: ft.Page):
                         font_family= st.PRIMARY_FONT,
                         italic= True,
                         color= st.TEXT_COLOR_1,
+                        width= 200,
                         text_align= ft.TextAlign.CENTER,
-                        width = 175,
+                        
                     ),
-                ]
+                ],
+                
             )
         )
         flascard_set_list.append(flashcard_folder)    
@@ -96,7 +99,12 @@ def main(page: ft.Page):
         content= ft.Column(
             controls= [
                 name_app_display,
-                ft.Row(flascard_set_list),
+                ft.Row(
+                    controls=flascard_set_list,  
+                    wrap= True,
+                    expand=True,
+                    alignment= ft.Alignment.CENTER,
+                ),
                 plus_button,
             ],
             alignment= ft.MainAxisAlignment.SPACE_BETWEEN
