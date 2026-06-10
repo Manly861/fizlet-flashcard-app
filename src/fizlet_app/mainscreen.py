@@ -95,6 +95,7 @@ def main(page: ft.Page):
     main_layout = ft.Container(
         expand= True,
         content= ft.Column(
+            scroll= ft.ScrollMode.AUTO,
             controls= [
                 name_app_display,
                 ft.Row(
