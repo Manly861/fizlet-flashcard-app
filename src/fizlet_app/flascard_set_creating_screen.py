@@ -9,15 +9,20 @@ def main(page: ft.Page, on_go_back=None):
     page.fonts = st.APP_FONTS
 
     def term_and_definition_input_area():
+        """create an area for user to enter value of term and definition"""
+        term_user_input= term_input_field()
+        definition_user_input= definition_input_field()
+        term_and_definition_inputs_list.append((term_user_input, definition_user_input))
+        print(term_and_definition_inputs_list)
         return ft.Row(
                 controls= [
-                    term_input,
+                    term_user_input,
                     ft.VerticalDivider(
                         width =20,
                         thickness = 2,
                         color= st.TEXT_COLOR_2,
                     ),
-                    definition_input,
+                    definition_user_input,
                 ],
                 height = 50,
                 alignment= ft.MainAxisAlignment.CENTER)
@@ -27,28 +32,71 @@ def main(page: ft.Page, on_go_back=None):
         input_area_list.controls.append(term_and_definition_input_area())
         page.update()
 
-    def process_input(e):
-        flashcard_set = {
-            "name": str(name_input.value),
-            "vocab_set": [ 
+    def process_user_input(e):
+        """process user' inputs after they click done button"""
+        vocab_set = []
+        for term_input, definition_input in term_and_definition_inputs_list:
+            vocab_set.append(
                 {
                     "term": str(term_input.value),
                     "definiton": str(definition_input.value)
                 }
-            ]        
+            )
+        flashcard_set = {
+            "name": str(name_input.value),
+            "vocab_set": vocab_set
         }
-        main_screen_list.append(flashcard_set)
-        for item in main_screen_list:
+        flashcard_set_list.append(flashcard_set)
+        for item in flashcard_set_list:
             file_name = item.get("name").strip() + ".json"
             result = controller.store_data(file_name, item)
-        print(main_screen_list)
+        print(flashcard_set_list)
         page.clean()
         if on_go_back:
             on_go_back(page)
         page.update()
+    
+    def term_input_field():
+        """Create a term_input field that ask users for value of the term"""
+        return ft.TextField(
+            label= "Term",
+            label_style= ft.TextStyle(
+                color= st.TEXT_COLOR_1,
+                weight= ft.FontWeight.BOLD,
+                font_family= st.PRIMARY_FONT),
+            hint_text= "Enter The Term.",
+            hint_style= ft.TextStyle(
+                color= st.TEXT_COLOR_2, 
+                italic= True,
+                font_family= st.PRIMARY_FONT),  
+            color= st.TEXT_COLOR_2,                  
+            bgcolor= st.BOX_COLOR,
+            border_color= st.BOX_COLOR,
+            width= term_and_definition_input_bar,
+        )
+    
+    def definition_input_field():
+        """Create a definition_input field that ask users for value of the definition"""
+        return ft.TextField(
+            label= "Definition",
+            label_style= ft.TextStyle(
+                color= st.TEXT_COLOR_1,
+                weight= ft.FontWeight.BOLD,
+                font_family= st.PRIMARY_FONT),
+            hint_text= "Enter The Definition.",
+            hint_style= ft.TextStyle(
+                color= st.TEXT_COLOR_2, 
+                italic= True,
+                font_family= st.PRIMARY_FONT),
+            color= st.TEXT_COLOR_2,                    
+            bgcolor= st.BOX_COLOR,
+            border_color= st.BOX_COLOR,
+            width= term_and_definition_input_bar,
+        )
         
     # Set initial value for width of the bar
-    main_screen_list = []
+    flashcard_set_list = []
+    term_and_definition_inputs_list = []
     name_input_bar = st.WIDTH_SCREEN - 25
     term_and_definition_input_bar = (st.WIDTH_SCREEN / 2) - 45
 
@@ -81,43 +129,6 @@ def main(page: ft.Page, on_go_back=None):
         border_color= st.BOX_COLOR,
         border_radius= 10,
         width= name_input_bar,
-    )
-
-    
-    # Create a term_input bar that ask users for value of the term
-    term_input = ft.TextField(
-        label= "Term",
-        label_style= ft.TextStyle(
-            color= st.TEXT_COLOR_1,
-            weight= ft.FontWeight.BOLD,
-            font_family= st.PRIMARY_FONT),
-        hint_text= "Enter The Term.",
-        hint_style= ft.TextStyle(
-            color= st.TEXT_COLOR_2, 
-            italic= True,
-            font_family= st.PRIMARY_FONT),  
-        color= st.TEXT_COLOR_2,                  
-        bgcolor= st.BOX_COLOR,
-        border_color= st.BOX_COLOR,
-        width= term_and_definition_input_bar,
-    )
-
-    # Create a definition_input bar that ask users for value of the definition
-    definition_input = ft.TextField(
-        label= "Definition",
-        label_style= ft.TextStyle(
-            color= st.TEXT_COLOR_1,
-            weight= ft.FontWeight.BOLD,
-            font_family= st.PRIMARY_FONT),
-        hint_text= "Enter The Definition.",
-        hint_style= ft.TextStyle(
-            color= st.TEXT_COLOR_2, 
-            italic= True,
-            font_family= st.PRIMARY_FONT),
-        color= st.TEXT_COLOR_2,                    
-        bgcolor= st.BOX_COLOR,
-        border_color= st.BOX_COLOR,
-        width= term_and_definition_input_bar,
     )
 
     # Create an add button that add a new term_input and definition_input bar
@@ -159,7 +170,7 @@ def main(page: ft.Page, on_go_back=None):
                 alignment=ft.Alignment.CENTER,
                 padding=ft.Padding.symmetric(horizontal=12, vertical=5),
             ),
-            on_click= process_input,
+            on_click= process_user_input,
             align= ft.Alignment.TOP_RIGHT,
         ),
     )
