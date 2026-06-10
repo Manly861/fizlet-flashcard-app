@@ -2,6 +2,11 @@ import flet as ft
 import styles as st
 import controller, time, json
 
+# Create initial value and retrieve data
+flash_card_width = 600
+flash_card_height = 350
+animation_speed = 350
+current_index = 0
 
 def main(page: ft.Page, on_go_back=None, set_chosen = ""):
     page.title = "Flashcard Set Creating Screen"
@@ -19,17 +24,25 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
     
     def show_side_of_card(e):
         print("CLICKED")
-        front_side.opacity = 0 if front_side.opacity == 1 else 1
-        back_side.opacity = 1 if back_side.opacity == 0 else 0
+        term_side.opacity = 0 if term_side.opacity == 1 else 1
+        definition_side.opacity = 1 if definition_side.opacity == 0 else 0
         page.update()
 
-    # Creat initial value
-    flash_card_width = 600
-    flash_card_height = 350
-    animation_speed = 350
-    selected_set = controller.get_data("Fourth One.json")
+    def move_on_to_next_card(e):
+        print("CLICKED and MOVING")
+        global current_index
+        current_index += 1
+        print(f"Current card is", {selected_set["vocab_set"][current_index]["term"]})
+        term_text_display.value = selected_set["vocab_set"][current_index]["term"]
+        definition_text_display.value = selected_set["vocab_set"][current_index]["definiton"]
+        term_side.opacity = 1.0
+        definition_side.opacity = 0.0
+        page.update()
+
+    #
+    selected_set = controller.get_data(str(set_chosen))
     selected_set = json.loads(selected_set)
-    
+
     # Display name of the set at the top of the screen
     name_display = ft.Container(
         ft.Text(
@@ -54,16 +67,18 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
         ),
     )
 
-    # Create a front and back side of the flashcard for displaying
-    front_side = ft.Container(
+    # Create a term (front) and  definition (back) side of the flashcard for displaying
+    term_text_display = ft.Text(
+        selected_set["vocab_set"][current_index]["term"],
+        color= st.TEXT_COLOR_1,
+        size= 100,
+        weight=ft.FontWeight.BOLD,
+        style= ft.TextStyle(ft.TextAlign.CENTER)
+    )
+
+    term_side = ft.Container(
         content= ft.Button(
-            content= ft.Text(
-                "A",
-                color= st.TEXT_COLOR_1,
-                size= 100,
-                weight=ft.FontWeight.BOLD,
-                style= ft.TextStyle(ft.TextAlign.CENTER)
-                ),
+            content= term_text_display,
             bgcolor= st.BOX_COLOR,
             style= ft.ButtonStyle(
                 shape= ft.RoundedRectangleBorder(radius=5),
@@ -76,16 +91,19 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
         opacity=1.0,
         alignment= ft.Alignment.CENTER,
         padding= ft.Padding.only(top=30,left=20),
-    
     )
-    back_side = ft.Container(
+
+    #
+    definition_text_display = ft.Text(
+        selected_set["vocab_set"][current_index]["definiton"],
+        color= st.TEXT_COLOR_1,
+        size= 80,
+        style= ft.TextStyle(ft.TextAlign.CENTER)
+    )
+
+    definition_side = ft.Container(
         content = ft.Button(
-            content= ft.Text(
-                "ABCxyc",
-                color= st.TEXT_COLOR_1,
-                size= 80,
-                style= ft.TextStyle(ft.TextAlign.CENTER)
-                ),
+            content= definition_text_display,
             bgcolor= st.BOX_COLOR,
             style= ft.ButtonStyle(
                 shape= ft.RoundedRectangleBorder(radius=5),
@@ -99,6 +117,9 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
         alignment= ft.Alignment.CENTER,
         padding= ft.Padding.only(top=30,left=20),
     )
+
+    # Create a layout for a flash card
+    flashcard_layout = ft.Stack([term_side, definition_side])
     
     # Create a next button
     next_button = ft.Container(
@@ -110,13 +131,15 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
                 color= st.TEXT_COLOR_1,
                 scale= 1.5,
             ),
+            disabled= True,
             bgcolor= st.PLUS_BUTTON_COLOR,
             style= ft.ButtonStyle(shape= ft.RoundedRectangleBorder(radius=5)),
         ),
         alignment= ft.Alignment.BOTTOM_CENTER,
+        on_click= move_on_to_next_card,
     )
     
-    #
+    # create a layout that home button and name will lie in a same line
     name_and_home_button_layout = ft.Container(
         content= ft.Row(
             alignment= ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -135,7 +158,7 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
         content= ft.Column(
             controls= [
                 name_and_home_button_layout,
-                ft.Stack([front_side, back_side]),
+                flashcard_layout,
                 next_button,
             ], 
         ), 
