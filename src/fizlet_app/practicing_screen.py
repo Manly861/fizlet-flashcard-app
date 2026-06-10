@@ -1,6 +1,6 @@
 import flet as ft
 import styles as st
-import controller, time, json
+import controller, congratulation_screen, json
 
 # Create initial value and retrieve data
 flash_card_width = 600
@@ -41,9 +41,10 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
             page.update()
         except IndexError:
             page.clean()
-            page.add(congratulation_layout)
+            congratulation_screen.main(page)
             page.update()
-    #
+            
+    # retreive the data of chosen flashcard set
     selected_set = controller.get_data(str(set_chosen))
     selected_set = json.loads(selected_set)
 
@@ -168,17 +169,7 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
         ), 
     )
 
-    # Add another layout that congrats to them
-    congratulation_layout = ft.Container(
-        content= ft.Text(
-            "You are Done, Great Job!",
-            size= 150,
-            color= st.TEXT_COLOR_1,
-            font_family= st.PRIMARY_FONT,
-        )
-    )
-
-    page.add(congratulation_layout)
+    page.add(main_layout)
     page.window.resizable = False
     page.update()
 

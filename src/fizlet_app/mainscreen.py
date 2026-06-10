@@ -1,12 +1,13 @@
 import flet as ft
 import styles as st
 import time
-import controller, practicing_screen
+import controller, congratulation_screen
 from flascard_set_creating_screen import main as show_set_creating_screen
 from practicing_screen import main as direct_user_to_practice_screen
 
 
 def main(page: ft.Page):
+
     def is_set_clicked(e):
         print("CLICKED")
         text_control = e.control.content.controls[1]
@@ -22,6 +23,7 @@ def main(page: ft.Page):
         page.clean()
         time.sleep(0.5)
         show_set_creating_screen(page, on_go_back=main)
+        page.update()
     
     def retreive_and_return_name_of_the_set():
         """retreiving saved data and display in this screen"""
@@ -138,7 +140,7 @@ def main(page: ft.Page):
             alignment= ft.MainAxisAlignment.SPACE_BETWEEN
         )
     )
-    
+
     page.add(main_layout)
     page.window.resizable = False
     page.update()
