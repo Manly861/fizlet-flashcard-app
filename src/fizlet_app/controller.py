@@ -26,7 +26,7 @@ def store_data(filename: str, data: dict) -> bool:
         return False
     return True
 
-def get_data(filename: str) -> str:
+def get_data(filename: str) -> dict:
     """gets data from file throws exception if not present"""
     file_path = "data/" + filename
     try:

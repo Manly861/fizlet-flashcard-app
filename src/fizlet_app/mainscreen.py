@@ -1,9 +1,9 @@
 import flet as ft
 import styles as st
 import time
-import controller
+import controller, practicing_screen
 from flascard_set_creating_screen import main as show_set_creating_screen
-from practicing_screen import main as direct_to_practice_screen
+from practicing_screen import main as direct_user_to_practice_screen
 
 
 def main(page: ft.Page):
@@ -14,7 +14,7 @@ def main(page: ft.Page):
         print(f"It is {name_set_chosen}")
         time.sleep(0.5)
         page.clean()
-        direct_to_practice_screen(page, on_go_back=main)
+        direct_user_to_practice_screen(page, on_go_back=main, set_chosen=name_set_chosen)
         page.update()
 
     def direct_user(e):

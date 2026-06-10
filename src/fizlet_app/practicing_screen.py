@@ -1,8 +1,9 @@
 import flet as ft
 import styles as st
-import controller, time
+import controller, time, json
 
-def main(page: ft.Page, on_go_back=None):
+
+def main(page: ft.Page, on_go_back=None, set_chosen = ""):
     page.title = "Flashcard Set Creating Screen"
     page.window.height = st.HEIGHT_SCREEN
     page.window.width = st.WIDTH_SCREEN
@@ -11,6 +12,7 @@ def main(page: ft.Page, on_go_back=None):
 
     def go_back(e):
         """direct user back to main screen"""
+        page.clean()
         if on_go_back:
             on_go_back(page)
         page.update()
@@ -25,11 +27,13 @@ def main(page: ft.Page, on_go_back=None):
     flash_card_width = 600
     flash_card_height = 350
     animation_speed = 350
-
+    selected_set = controller.get_data("Fourth One.json")
+    selected_set = json.loads(selected_set)
+    
     # Display name of the set at the top of the screen
     name_display = ft.Container(
         ft.Text(
-            " Name Display ",
+            selected_set["name"],
             size = 24,
             font_family= st.PRIMARY_FONT,
             color = st.TEXT_COLOR_1,
