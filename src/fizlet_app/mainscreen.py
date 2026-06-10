@@ -70,11 +70,9 @@ def main(page: ft.Page):
                         italic= True,
                         color= st.TEXT_COLOR_1,
                         width= 200,
-                        text_align= ft.TextAlign.CENTER,
-                        
+                        text_align= ft.TextAlign.CENTER,  
                     ),
-                ],
-                
+                ]
             )
         )
         flascard_set_list.append(flashcard_folder)    
@@ -109,7 +107,6 @@ def main(page: ft.Page):
             ],
             alignment= ft.MainAxisAlignment.SPACE_BETWEEN
         )
-
     )
     page.add(main_layout)
     page.window.resizable = False

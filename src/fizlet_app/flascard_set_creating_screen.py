@@ -8,12 +8,24 @@ def main(page: ft.Page, on_go_back=None):
     page.bgcolor = st.BACKGROUND_COLOR
     page.fonts = st.APP_FONTS
 
+    def term_and_definition_input_area():
+        return ft.Row(
+                controls= [
+                    term_input,
+                    ft.VerticalDivider(
+                        width =20,
+                        thickness = 2,
+                        color= st.TEXT_COLOR_2,
+                    ),
+                    definition_input,
+                ],
+                height = 50,
+                alignment= ft.MainAxisAlignment.CENTER)
+
     def add_term_and_definition(e):
         print("CLICKED")
-        is_clicked = True
-        while is_clicked:
-            print("1")
-            is_clicked = False
+        input_area_list.controls.append(term_and_definition_input_area())
+        page.update()
 
     def process_input(e):
         flashcard_set = {
@@ -172,19 +184,7 @@ def main(page: ft.Page, on_go_back=None):
         spacing=10,
         padding=ft.Padding.only(top= 10, bottom= 10, left = 0),
         controls=[
-            ft.Row(
-                controls =[
-                    term_input,
-                    ft.VerticalDivider(
-                        width =20,
-                        thickness = 2,
-                        color= st.TEXT_COLOR_2,
-                    ),
-                    definition_input,
-                ],
-                height = 50,
-                alignment= ft.MainAxisAlignment.CENTER, 
-            ), 
+            term_and_definition_input_area()
         ],
     )
     
