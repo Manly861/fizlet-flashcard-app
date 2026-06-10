@@ -47,6 +47,7 @@ def main(page: ft.Page):
         alignment= ft.Alignment(0, 0),
     )
 
+    # Put all those varible into a layout
     main_layout = ft.Container(
         content= ft.Column(
             controls= [

@@ -80,6 +80,7 @@ def main(page: ft.Page):
     # Create a plus button
     plus_button = ft.Container(
         expand= True,
+        padding= ft.Padding.only(bottom=5),
         content= ft.Button(
             content= ft.Icon(
                 ft.Icons.ADD, 
@@ -92,6 +93,7 @@ def main(page: ft.Page):
         alignment= ft.Alignment.BOTTOM_CENTER
     )
 
+    # Put all those varible into a layout
     main_layout = ft.Container(
         expand= True,
         content= ft.Column(

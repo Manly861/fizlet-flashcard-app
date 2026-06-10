@@ -13,7 +13,6 @@ def main(page: ft.Page, on_go_back=None):
         term_user_input= term_input_field()
         definition_user_input= definition_input_field()
         term_and_definition_inputs_list.append((term_user_input, definition_user_input))
-        print(term_and_definition_inputs_list)
         return ft.Row(
                 controls= [
                     term_user_input,
@@ -27,7 +26,8 @@ def main(page: ft.Page, on_go_back=None):
                 height = 50,
                 alignment= ft.MainAxisAlignment.CENTER)
 
-    def add_term_and_definition(e):
+    def add_term_and_definition_field(e):
+        """add new term and definition input field when being clicked"""
         print("CLICKED")
         input_area_list.controls.append(term_and_definition_input_area())
         page.update()
@@ -57,7 +57,7 @@ def main(page: ft.Page, on_go_back=None):
         page.update()
     
     def term_input_field():
-        """Create a term_input field that ask users for value of the term"""
+        """Create a term_input field"""
         return ft.TextField(
             label= "Term",
             label_style= ft.TextStyle(
@@ -76,7 +76,7 @@ def main(page: ft.Page, on_go_back=None):
         )
     
     def definition_input_field():
-        """Create a definition_input field that ask users for value of the definition"""
+        """Create a definition input field"""
         return ft.TextField(
             label= "Definition",
             label_style= ft.TextStyle(
@@ -103,7 +103,7 @@ def main(page: ft.Page, on_go_back=None):
     # Display name of the set at the top of the screen
     name_display = ft.Container(
         ft.Text(
-            "Almost Done, Ya hu",
+            " ",
             size = 24,
             color = st.TEXT_COLOR_1,
             font_family= st.PRIMARY_FONT,
@@ -146,7 +146,7 @@ def main(page: ft.Page, on_go_back=None):
                 alignment=ft.Alignment.CENTER,
                 padding=ft.Padding.symmetric(horizontal=13, vertical=6),
             ),
-            on_click=add_term_and_definition,
+            on_click=add_term_and_definition_field,
         ),
         padding= ft.Padding.only(bottom=5),
         alignment= ft.Alignment.BOTTOM_CENTER,
@@ -199,6 +199,7 @@ def main(page: ft.Page, on_go_back=None):
         ],
     )
     
+    # Put all those varible into a layout
     main_layout = ft.Container(
         expand= True,
         content= ft.Column(
