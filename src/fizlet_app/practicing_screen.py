@@ -18,14 +18,14 @@ def main(page: ft.Page):
     
     def show_side_of_card(e):
         print("CLICKED")
-        if front_side:
-            front_side.opacity = 0 if front_side.opacity == 1 else 1
-        else:
-            back_side.opacity = 1 if back_side.opacity == 0 else 0
+        front_side.opacity = 0 if front_side.opacity == 1 else 1
+        back_side.opacity = 1 if back_side.opacity == 0 else 0
+        page.update()
 
     # Creat initial value
     flash_card_width = 600
     flash_card_height = 350
+    animation_speed = 350
 
     # Display name of the set at the top of the screen
     name_display = ft.Container(
@@ -67,32 +67,34 @@ def main(page: ft.Page):
                 ),
             width = flash_card_width,
             height= flash_card_height,
+            on_click= show_side_of_card,
         ),
+        animate_opacity= animation_speed,
         opacity=1.0,
         alignment= ft.Alignment.CENTER,
         padding= ft.Padding.only(top=30,left=20),
-        on_click= show_side_of_card,
+    
     )
     back_side = ft.Container(
-        content =
-            ft.Button(
-                content= ft.Text(
-                    "ABCxyc",
-                    color= st.TEXT_COLOR_1,
-                    size= 80,
-                    style= ft.TextStyle(ft.TextAlign.CENTER)
-                    ),
-                bgcolor= st.BOX_COLOR,
-                style= ft.ButtonStyle(
-                    shape= ft.RoundedRectangleBorder(radius=5),
-                    ),
-                width = flash_card_width,
-                height= flash_card_height,
-            ),
-            opacity=0.0,
-            alignment= ft.Alignment.CENTER,
-            padding= ft.Padding.only(top=30,left=20),
+        content = ft.Button(
+            content= ft.Text(
+                "ABCxyc",
+                color= st.TEXT_COLOR_1,
+                size= 80,
+                style= ft.TextStyle(ft.TextAlign.CENTER)
+                ),
+            bgcolor= st.BOX_COLOR,
+            style= ft.ButtonStyle(
+                shape= ft.RoundedRectangleBorder(radius=5),
+                ),
+            width = flash_card_width,
+            height= flash_card_height,
             on_click= show_side_of_card,
+        ),
+        opacity=0.0,
+        animate_opacity= animation_speed,
+        alignment= ft.Alignment.CENTER,
+        padding= ft.Padding.only(top=30,left=20),
     )
     
     # Create a next button
@@ -132,10 +134,8 @@ def main(page: ft.Page):
                 name_and_home_button_layout,
                 ft.Stack([front_side, back_side]),
                 next_button,
-            ],
-            
-        ),
-        
+            ], 
+        ), 
     )
 
     page.add(main_layout)
