@@ -27,36 +27,18 @@
 * For Practicing A Set
     1. As you is in the **Main Screen**, you may chose a set by clicking to the box above the name to select the onr you want to practice
     2. After that, you will be directed to **Practicing Screen** where they can start to enhance their memory
-        - Specifically, the card will automatically displays the front side which is the term. To reveal the definition, you can flip it by clicking that box
+        - Specifically, the card will automatically displays the front side which is the term. To reveal the definition, you can flip it by clicking to it
         - To move on to the next card, you can click the button which has <i>the arrow towards the right</i>
         - In contrast, to move back to previous card, you can click the button which has <i>the arrow towards the left</i>
-    3. Then, if you reach to the end of the set, which means there is no more card, you would be congratulated and moved back to **Main Screen**
-## C. Keep In Mind
-Fizlet
-To improve the user experience with the **Daily Planner Assistant**, user should pay attention to the following points: 
-* **For the task's input**:
-    - user can enter a long string (e.g., help student to complete the project) or a single word (e.g., help, complete, organize).
-    - Itan be considered as invalid data and prompt the user to re-enter if the it includes special characters (!, @, #,  $, %,...) or numbers. 
-* **For the estimated time's input**:
+        - In addtion, if you feel tired and exhausted while studying, you can escape by clicking the **Home Button** that are on the top left corner of the screen
+    3. Untill you reach to the end of the set, which means there is no more card, you would be congratulated and moved back to **Main Screen**
+    4. At this point, you can make another decisions-- whether creating or studying.
 
-     The information will be invalid when:  
-    - It includes letters (a-z), special characters such as !, @, #, $, %, ^, &,... and includes spaces.  
-    - Negative numbers or numbers greater than 24 hours (24 hours for time entered in hours and 1440 for time entered in minutes).  
-
-* **For Yes/No questions** (*"Do you want to continue?"* and *"Do you want to enter time input in hour?"*)
-    - The answer is only valid if it is **y** (indicates Yes) and **n** (indicates No), otherwise an error will be displayed and the user will be prompted to re-enter. 
-    - ***Especially:***
-        - **For "Do you want to continue?"**, if the user uses any characters other than “y”, the program will treat all of them as “n” and will start processing the data to generate a schedule.  
-        - **For "Do you want to enter time input in hours?"**, it will be asked again whenever the user has entered invalid information while being asked for the estimated time.
+## C. Important Notes
+Fizlet is still the application that is in progress. Therefore, it may have some errors  or un-improving UIs.
+- When entering the value for name's input, you can enter any symbol you want, except dots
+- When studying, you can not go to other cards if you are in the first card and clicking on the **Backward-Arrow Button**
 
 # 
 
  ***Thank Your For Using Fizlet***
-
-
-
-
-ADD:
-may add a notification when they are waiting to be directed (Done)
-adding notification when the name input is empty 
-issue with dot in name 
