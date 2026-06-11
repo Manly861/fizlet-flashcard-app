@@ -7,8 +7,13 @@ from practicing_screen import main as direct_user_to_practice_screen
 
 
 def main(page: ft.Page):
-    
+    page.title = "Main Screen"
+    page.window.height = st.HEIGHT_SCREEN
+    page.window.width = st.WIDTH_SCREEN
+    page.bgcolor = st.BACKGROUND_COLOR
+    page.fonts = st.APP_FONTS
 
+    # create functions
     def is_set_clicked(e):
         print("CLICKED")
         text_control = e.control.content.controls[1]
@@ -39,12 +44,6 @@ def main(page: ft.Page):
                     name_set += index
             name_of_sets_list.append(name_set)
         return name_of_sets_list
-
-    page.title = "Main Screen"
-    page.window.height = st.HEIGHT_SCREEN
-    page.window.width = st.WIDTH_SCREEN
-    page.bgcolor = st.BACKGROUND_COLOR
-    page.fonts = st.APP_FONTS
     
     def retreive_and_return_name_of_the_set():
         """retreiving saved data and display in this screen"""

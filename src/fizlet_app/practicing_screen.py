@@ -22,6 +22,7 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
         page.update()
     
     def show_side_of_card(e):
+        """flip the card when user clicks on it"""
         print("CLICKED")
         term_side.opacity = 0 if term_side.opacity == 1 else 1
         definition_side.opacity = 1 if definition_side.opacity == 0 else 0
@@ -29,16 +30,22 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
 
     def move_on_to_next_card(e):
         """Move user to the next card"""
+        # set initial value of current_index
         print("CLICKED and MOVING ON")
         global current_index
         current_index += 1
+        
         try:
+            # change the text of term and definition into next data
             print(f"Current card is", {selected_set["vocab_set"][current_index]["term"]})
             term_text_display.value = selected_set["vocab_set"][current_index]["term"]
             definition_text_display.value = selected_set["vocab_set"][current_index]["definition"]
             term_side.opacity = 1.0
             definition_side.opacity = 0.0
             page.update()
+
+            # if they reach the end of the set, 
+            # they will be direct back to main screen
         except IndexError:
             page.clean()
             congratulation_screen.main(page)
@@ -46,20 +53,23 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
 
     def move_back_to_previous_card(e):
         """move user back to the previous card"""
+        # set initial value of current_index
         print("CLICKED and MOVING BACK")
         global current_index
         current_index -= 1
-        try:
-            print(f"Current card is", {selected_set["vocab_set"][current_index]["term"]})
-            term_text_display.value = selected_set["vocab_set"][current_index]["term"]
-            definition_text_display.value = selected_set["vocab_set"][current_index]["definition"]
-            term_side.opacity = 1.0
-            definition_side.opacity = 0.0
-            page.update()
-        except IndexError:
-            page.clean()
-            main(page)
-            page.update()
+
+        # check if user try to move to index -1
+        if current_index == -1:
+            current_index = 0
+
+        # change the text of term and definition into previous data
+        print(f"Current card is", {selected_set["vocab_set"][current_index]["term"]})
+        term_text_display.value = selected_set["vocab_set"][current_index]["term"]
+        definition_text_display.value = selected_set["vocab_set"][current_index]["definition"]
+        term_side.opacity = 1.0
+        definition_side.opacity = 0.0
+        page.update()
+
  
     # retreive the data of chosen flashcard set
     global current_index
@@ -95,7 +105,7 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
     term_text_display = ft.Text(
         selected_set["vocab_set"][current_index]["term"],
         color= st.TEXT_COLOR_1,
-        size= 100,
+        size= 50 if len(selected_set["vocab_set"][current_index]["term"]) > 35 else 80,
         weight=ft.FontWeight.BOLD,
         style= ft.TextStyle(ft.TextAlign.CENTER)
     )
@@ -121,7 +131,7 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
     definition_text_display = ft.Text(
         selected_set["vocab_set"][current_index]["definition"],
         color= st.TEXT_COLOR_1,
-        size= 80,
+        size= 16 if len(selected_set["vocab_set"][current_index]["term"]) > 35 else 25,
         style= ft.TextStyle(ft.TextAlign.CENTER)
     )
 
