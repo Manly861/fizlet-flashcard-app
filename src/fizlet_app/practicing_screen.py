@@ -23,7 +23,7 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
     
     def show_side_of_card(e):
         """flip the card when user clicks on it"""
-        print("CLICKED")
+        print("CLICKED and FLIPPED")
         term_side.opacity = 0 if term_side.opacity == 1 else 1
         definition_side.opacity = 1 if definition_side.opacity == 0 else 0
         page.update()
@@ -105,9 +105,10 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
     term_text_display = ft.Text(
         selected_set["vocab_set"][current_index]["term"],
         color= st.TEXT_COLOR_1,
-        size= 50 if len(selected_set["vocab_set"][current_index]["term"]) > 35 else 80,
+        size= 32 if len(selected_set["vocab_set"][current_index]["term"]) > 35 else 50,
         weight=ft.FontWeight.BOLD,
-        style= ft.TextStyle(ft.TextAlign.CENTER)
+        style= ft.TextStyle(ft.TextAlign.CENTER),
+        text_align= ft.TextAlign.CENTER,
     )
 
     term_side = ft.Container(
@@ -131,8 +132,9 @@ def main(page: ft.Page, on_go_back=None, set_chosen = ""):
     definition_text_display = ft.Text(
         selected_set["vocab_set"][current_index]["definition"],
         color= st.TEXT_COLOR_1,
-        size= 16 if len(selected_set["vocab_set"][current_index]["term"]) > 35 else 25,
-        style= ft.TextStyle(ft.TextAlign.CENTER)
+        size= 16 if len(selected_set["vocab_set"][current_index]["term"]) > 35 else 30,
+        style= ft.TextStyle(ft.TextAlign.CENTER),
+        text_align= ft.TextAlign.CENTER,
     )
 
     definition_side = ft.Container(
